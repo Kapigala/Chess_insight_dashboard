@@ -212,7 +212,7 @@ app.layout = html.Div(children=[
         dcc.Graph(id='graph', figure=box_fig)
     ]),
     html.Div([
-        html.H1(children='2. Progres wybranych zawodników'),
+        html.H1(children='2. Postęp wybranych zawodników'),
         html.Div(children='Modyfikacje: [tempo]'),
         dcc.Graph(
             id='graph2',
