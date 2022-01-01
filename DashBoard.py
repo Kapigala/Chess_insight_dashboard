@@ -61,13 +61,14 @@ def hist_b(lata='1990-2000'):
     if lata == 'All':
         fig = px.histogram(gracze['federation'],
                            height=800,
-                           title='Liczba utytułowanych zawodników').update_xaxes(categoryorder='total descending')
+                           title='Liczba utytułowanych zawodników',
+                           color_discrete_sequence=['indianred']).update_xaxes(categoryorder='total descending')
         return fig
     else:
-        fig = px.histogram(gracze[(gracze['yob'] < int(lata[5:9])) & (gracze['yob'] > int(lata[0:4]))]['federation'],
+        fig = px.histogram(gracze[(gracze['yob']<int(lata[5:9])) & (gracze['yob']>int(lata[0:4]))]['federation'],
                            height=800,
-                           title='Liczba utytułowanych zawodników urodzonych w latach {}'.format(lata)).update_xaxes(
-            categoryorder='total descending')
+                           title='Liczba utytułowanych zawodników urodzonych w latach {}'.format(lata),
+                           color_discrete_sequence=['indianred']).update_xaxes(categoryorder='total descending')
         return fig
 
 
