@@ -10,5 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          depth: 0
       - name: Push to Heroku
         run: git push -f https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/lit-wildwood-97898.git origin/main:main
