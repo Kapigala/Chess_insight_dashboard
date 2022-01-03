@@ -10,8 +10,13 @@ import json
 import os
 
 # Translacja nazw federacji na ISO3
-deco = {'URU': 'URY', 'SUI': 'CHE', 'CHI': 'CHL', 'ENG': 'GBR', 'NED': 'NLD', 'POR': 'PRT', 'GER': 'DEU',
-        'LAT': 'LVA', 'PAR': 'PRY', 'MGL': 'MNG', 'CRO': 'HVO', 'KSA': 'SAU', 'IRI': 'IRN', 'GRE': 'GRC'}
+deco={'URU':'URY','SUI':'CHE','CHI': 'CHL','ENG':'GBR','NED':'NLD','POR':'PRT','GER':'DEU',
+      'LAT':'LVA','PAR':'PRY','MGL':'MNG','CRO':'HVO','KSA':'SAU','IRI':'IRN','GRE':'GRC','ANG':'AGO',
+      'RSA':'ZAF','ZAM':'ZMB','ZIM':'ZWE','VIE':"VNM","MAD":'MDG','LBA':"LBY",'KUW':'KWT','ALG':"DZA",
+      'BAR':'BRB','BOT':'BWA','TOG':"TGO","PHI":"PHL","SLO":"SVN","NGR":'NGA','OMA':'OMN',"NEP":'NPL',
+      "CAM":'CMR','DEN':"DNK","FIJ":"FJI","HON":"HND","SUD":"SDN","SRI":"LKA","HAI":"HTI","INA":"IDN",
+      "BUL":'BGR','BAH':'BHR',"SEY":"SYC","TAN":'TZA','UAE':'ARE','BER':'BMU','NCA':'NIC',"MRI":"MUS",
+      "MTN":'MRT',"MYA":'MMR'}
 # lista wartości dla suwaków/kolumn
 lata = ['All', '1921-1934', '1935-1945', '1946-1956', '1957-1967', '1968-1978', '1979-1989', '1990-2000', '2001-2011']
 h = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'fide_id']
