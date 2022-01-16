@@ -103,7 +103,6 @@ def bar_chart(lista=['POL', 'RUS', 'GER', 'ESP', 'IND']):
                  title="Tytuły w federacji")
     return fig
 
-
 def hist_a(rok='2020', miesiac='Dec', tempo='standard'):
     global gracze
     dane = pd.read_csv('./data/chess_{}_rating_{}.csv'.format(rok, tempo), names=h)
@@ -115,67 +114,65 @@ def hist_a(rok='2020', miesiac='Dec', tempo='standard'):
                        marginal='violin')
     return fig
 
+def mapa(tryb='AVG_ELO',rok='2020',miesiac='Dec',tempo='standard'):
+    c=[]
+    df_base=df_init(rok,miesiac,tempo)
 
-def mapa(tryb='GM_COUNT', rok='2020', miesiac='Dec', tempo='standard'):
-    c = []
-    df_base = df_init(rok, miesiac, tempo)
-    for i in deco.keys():
-        df_base.loc[df_base['federation'] == i, 'federation'] = deco[i]
-
-    if tryb == 'AVG_ELO' or tryb == 'MAX_ELO':
-        if tryb == 'AVG_ELO':
-            rankingi = df_base.groupby("federation").mean().round()[miesiac]
-            c = pd.DataFrame({'federation': rankingi.index.array, 'AVG_elo': rankingi.array})
-        elif tryb == 'MAX_ELO':
-            rankingi = df_base.groupby("federation").max()[miesiac]
-            c = pd.DataFrame({'federation': rankingi.index.array, 'MAX_elo': rankingi.array})
-
+    if tryb =='AVG_ELO' or tryb=='MAX_ELO':
+        if tryb=='AVG_ELO':
+            rankingi=df_base.groupby("federation").mean().round()[miesiac]
+            c=pd.DataFrame({'federation':rankingi.index.array,'AVG_elo':rankingi.array})
+        elif tryb=='MAX_ELO':
+            rankingi=df_base.groupby("federation").max()[miesiac]
+            c=pd.DataFrame({'federation':rankingi.index.array,'MAX_elo':rankingi.array})
+        for i in deco.keys():
+            c.loc[c['federation']==i,'federation']=deco[i]
         fig = px.choropleth(c,
                             geojson=countries,
                             locations='federation',
                             locationmode='ISO-3',
                             color='{}_elo'.format(tryb[0:3]),
                             color_continuous_scale="Viridis",
-                            labels={'{}_elo'.format(tryb[0:3]): '{} Ranking utytułowanego zawodnika w kraju'.format(
-                                tryb[0:3])}
+                            labels={'{}_elo'.format(tryb[0:3]):'{} Ranking utytułowanego zawodnika w kraju'.format(tryb[0:3])}
                             )
         return fig
     else:
-        df = pd.DataFrame(columns=['federation', 'title', 'count'])
-        for i in df_base['federation'].unique():
-            for title_1 in ['WCM', 'CM', 'WFM', 'FM', 'WIM', 'IM', 'WGM', 'GM']:
-                df = df.append({'federation': i, 'title': title_1,
-                                'count': df_base[(df_base['federation'] == i) & (df_base['title'] == title_1)].shape[
-                                    0]}, ignore_index=True)
-
-        if tryb == 'GM_COUNT':
-            c = df[df['title'] == 'GM'].sort_values(by=['count'], ascending=False)
-        elif tryb == 'IM_COUNT':
-            c = df[df['title'] == 'IM'].sort_values(by=['count'], ascending=False)
-        elif tryb == 'WGM_COUNT':
-            c = df[df['title'] == 'WGM'].sort_values(by=['count'], ascending=False)
-        elif tryb == 'WIM_COUNT':
-            c = df[df['title'] == 'WIM'].sort_values(by=['count'], ascending=False)
-        elif tryb == 'FM_COUNT':
-            c = df[df['title'] == 'FM'].sort_values(by=['count'], ascending=False)
-        elif tryb == 'WFM_COUNT':
-            c = df[df['title'] == 'WFM'].sort_values(by=['count'], ascending=False)
-        elif tryb == 'WCM_COUNT':
-            c = df[df['title'] == 'WCM'].sort_values(by=['count'], ascending=False)
-        elif tryb == 'CM_COUNT':
-            c = df[df['title'] == 'CM'].sort_values(by=['count'], ascending=False)
-
+        if tryb=='GM_COUNT':
+            c=df_base[df_base['title']=='GM'].groupby(['federation']).size().reset_index()
+            c=c.rename(columns={0:'count'})
+        elif tryb=='IM_COUNT':
+            c=df_base[df_base['title']=='IM'].groupby(['federation']).size().reset_index()
+            c=c.rename(columns={0:'count'})
+        elif tryb=='WGM_COUNT':
+            c=df_base[df_base['title']=='WGM'].groupby(['federation']).size().reset_index()
+            c=c.rename(columns={0:'count'})
+        elif tryb=='WIM_COUNT':
+            c=df_base[df_base['title']=='WIM'].groupby(['federation']).size().reset_index()
+            c=c.rename(columns={0:'count'})
+        elif tryb=='FM_COUNT':
+            c=df_base[df_base['title']=='FM'].groupby(['federation']).size().reset_index()
+            c=c.rename(columns={0:'count'})
+        elif tryb=='WFM_COUNT':
+            c=df_base[df_base['title']=='WFM'].groupby(['federation']).size().reset_index()
+            c=c.rename(columns={0:'count'})
+        elif tryb=='WCM_COUNT':
+            c=df_base[df_base['title']=='WCM'].groupby(['federation']).size().reset_index()
+            c=c.rename(columns={0:'count'})
+        elif tryb=='CM_COUNT':
+            c=df_base[df_base['title']=='CM'].groupby(['federation']).size().reset_index()
+            c=c.rename(columns={0:'count'})
+        for i in deco.keys():
+            c.loc[c['federation']==i,'federation']=deco[i]
         fig = px.choropleth(c,
                             geojson=countries,
                             locations='federation',
                             locationmode='ISO-3',
                             color='count',
-                            color_continuous_scale="Viridis",
-                            range_color=(int(c['count'].min()), int(c['count'].max())),
-                            labels={'count': 'Liczba {}'.format(tryb[0:2])}
+                            color_continuous_scale="Sunsetdark",
+                            range_color=(int(c['count'].min()),int(c['count'].max())),
+                            labels={'count':'Liczba {}'.format(tryb[0:2])}
                             )
         return fig
-
 
 ##Generowanie wykresów
 box_fig = box()
@@ -187,7 +184,6 @@ hist_elo_fig = hist_a()
 map_fig = mapa()
 
 ll = ['x', 'x', 'x', 'x', 'x']
-# app = dash.Dash()
 
 app.layout = html.Div([
     dcc.Tabs(id="tabs", value='tab-0-example-graph', children=[
