@@ -197,19 +197,19 @@ app.layout = html.Div(children=[
                      options=[{'label': i, 'value': i} for i in ['2015', '2016', '2017', '2018', '2019', '2020']],
                      value='2020', placeholder='Select year'),
         dcc.Dropdown(id='suwak_2', options=[{'label': i, 'value': i} for i in ['standard', 'rapid', 'blitz']],
-                     value='standard'),
+                     value = 'standard'),
         dcc.Dropdown(id='suwak_3', options=[{'label': i, 'value': i} for i in
                                             ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct',
-                                             'Nov', 'Dec']], value='Dec', placeholder='Select month'),
+                                             'Nov', 'Dec']], value = 'Dec', placeholder = 'Select month'),
         dcc.Dropdown(id='suwak_4', options=[{'label': i, 'value': i} for i in np.sort(gracze['federation'].unique())],
-                     value=['POL', 'RUS', 'GER', 'ESP', 'IND'], placeholder='Select country', multi=True),
+                     value=['POL', 'RUS', 'GER', 'ESP', 'IND'], placeholder='Select country', multi = True),
         dcc.Dropdown(id='suwak_5',
                      options=[{'label': i, 'value': i} for i in ['GM', 'WGM', 'CM', 'WCM', 'IM', 'WIM', 'FM', 'WFM']],
                      value='GM', placeholder='Select title'),
         dcc.Dropdown(id='suwak_6', options=[{'label': i, 'value': i} for i in
                                             ['AVG_ELO', 'MAX_ELO', 'GM_COUNT', 'IM_COUNT', 'WGM_COUNT', 'WIM_COUNT']],
                      value='AVG_ELO', placeholder='Select feature'),
-        dcc.Dropdown(id='suwak_7', options=[{'label': i, 'value': i} for i in lata], value='1990-2000',
+        dcc.Dropdown(id='suwak_7', options =[{'label': i, 'value': i} for i in lata], value = '1990-2000',
                      placeholder='Select years')
     ]),
     html.Div([
@@ -250,16 +250,16 @@ app.layout = html.Div(children=[
         html.H1(children='4 Rozkład rankingowy'),
         html.Div(children='Modyfikacje: [tempo,rok,miesiąc]'),
         dcc.Graph(
-            id='graph6',
-            figure=hist_elo_fig
+            id = 'graph6',
+            figure = hist_elo_fig
         ),
     ]),
     html.Div([
         html.H1(children='5. Szachowa mapa świata'),
         html.Div(children='Modyfikacje: [tempo,rok,miesiąc,tryb]'),
         dcc.Graph(
-            id='graph7',
-            figure=map_fig
+            id = 'graph7',
+            figure = map_fig
         ),
     ]),
 ])
@@ -267,10 +267,10 @@ app.layout = html.Div(children=[
 
 # Callbacks
 @app.callback(
-    Output(component_id='graph', component_property='figure'),
-    [Input(component_id='suwak_1', component_property='value'),
-     Input(component_id='suwak_2', component_property='value'),
-     Input(component_id='suwak_3', component_property='value')
+    Output(component_id='graph', component_property = 'figure'),
+    [Input(component_id='suwak_1', component_property = 'value'),
+     Input(component_id='suwak_2', component_property = 'value'),
+     Input(component_id='suwak_3', component_property = 'value')
      ]
 )
 def update_graph(new_val, new_value_2, new_value_3):
@@ -279,8 +279,8 @@ def update_graph(new_val, new_value_2, new_value_3):
 
 
 @app.callback(
-    Output(component_id='graph2', component_property='figure'),
-    [Input(component_id='suwak_2', component_property='value')
+    Output(component_id = 'graph2', component_property = 'figure'),
+    [Input(component_id = 'suwak_2', component_property = 'value')
      ]
 )
 def update_graph2(v1):
@@ -299,8 +299,8 @@ def update_graph3(v1):
 
 
 @app.callback(
-    Output(component_id='graph4', component_property='figure'),
-    [Input(component_id='suwak_7', component_property='value')
+    Output(component_id='graph4', component_property = 'figure'),
+    [Input(component_id='suwak_7', component_property = 'value')
      ]
 )
 def update_graph4(v2):
@@ -309,8 +309,8 @@ def update_graph4(v2):
 
 
 @app.callback(
-    Output(component_id='graph5', component_property='figure'),
-    [Input(component_id='suwak_4', component_property='value')],
+    Output(component_id='graph5', component_property = 'figure'),
+    [Input(component_id='suwak_4', component_property = 'value')],
 
 )
 def update_graph5(v2):
@@ -319,10 +319,10 @@ def update_graph5(v2):
 
 
 @app.callback(
-    Output(component_id='graph6', component_property='figure'),
-    [Input(component_id='suwak_1', component_property='value'),
-     Input(component_id='suwak_2', component_property='value'),
-     Input(component_id='suwak_3', component_property='value')
+    Output(component_id='graph6', component_property = 'figure'),
+    [Input(component_id='suwak_1', component_property = 'value'),
+     Input(component_id='suwak_2', component_property = 'value'),
+     Input(component_id='suwak_3', component_property = 'value')
      ]
 )
 def update_graph6(v1, v2, v3):
@@ -331,17 +331,16 @@ def update_graph6(v1, v2, v3):
 
 
 @app.callback(
-    Output(component_id='graph7', component_property='figure'),
-    [Input(component_id='suwak_6', component_property='value'),
-     Input(component_id='suwak_1', component_property='value'),
-     Input(component_id='suwak_3', component_property='value'),
-     Input(component_id='suwak_2', component_property='value')
+    Output(component_id='graph7', component_property = 'figure'),
+    [Input(component_id='suwak_6', component_property = 'value'),
+     Input(component_id='suwak_1', component_property = 'value'),
+     Input(component_id='suwak_3', component_property = 'value'),
+     Input(component_id='suwak_2', component_property = 'value')
      ]
 )
 def update_graph7(v1, v2, v3, v4):
     map_fig = mapa(v1, v2, v3, v4)
     return map_fig
-
 
 # Uruchamianie lokalne
 # if __name__ == '__main__':
