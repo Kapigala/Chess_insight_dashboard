@@ -1,3 +1,4 @@
+import os
 import dash
 from dash import html
 from dash import dcc
@@ -369,6 +370,6 @@ def render_content(tab):
             dcc.Dropdown(id='suwak_3',options=[{'label': i, 'value': i} for i in ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']],value='Dec',placeholder='Select month'),
             dcc.Dropdown(id='suwak_6',options=[{'label': i, 'value': i} for i in ['AVG_ELO','MAX_ELO','GM_COUNT','IM_COUNT','WGM_COUNT','WIM_COUNT']],value='GM_COUNT',placeholder='Select feature'),
         ])
-app.run_server(debug=True,dev_tools_ui=False,dev_tools_props_check=False)
-
+#app.run_server(debug=True,dev_tools_ui=False,dev_tools_props_check=False)
+app.run_server(debug=False,dev_tools_ui=False,dev_tools_props_check=False, port=os.getenv('PORT', '8050'), host="0.0.0.0")
       
