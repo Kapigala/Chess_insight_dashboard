@@ -30,7 +30,8 @@ gracze=pd.read_csv(file_path)
 #Redukcja o zawodników amatorskich
 gracze=gracze[gracze['title'].isnull()==False]
 
-app = dash.Dash(__name__, suppress_callback_exceptions=True)
+app = dash.Dash()
+app.config.suppress_callback_exceptions=True
 
 #--Definicje--
 def df_init(rok,miesiac,tempo):
