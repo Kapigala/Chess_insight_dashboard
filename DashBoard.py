@@ -1,4 +1,3 @@
-# Niezbędne biblioteki
 import dash
 from dash import html
 from dash import dcc
@@ -8,6 +7,7 @@ import plotly.express as px
 import numpy as np
 import json
 import os
+
 
 #Translacja nazw federacji na ISO3
 deco={'URU':'URY','SUI':'CHE','CHI': 'CHL','ENG':'GBR','NED':'NLD','POR':'PRT','GER':'DEU',
@@ -30,8 +30,7 @@ gracze=pd.read_csv(file_path)
 #Redukcja o zawodników amatorskich
 gracze=gracze[gracze['title'].isnull()==False]
 
-# Inicjacja aplikacji
-app = dash.Dash()
+app = dash.Dash(__name__, suppress_callback_exceptions=True)
 
 #--Definicje--
 def df_init(rok,miesiac,tempo):
@@ -58,7 +57,7 @@ def linepll(tempo='standard'):
     fig = px.line(df, x='data', y='Elo', color='fide_id',title='ELO dla szachów {}'.format(tempo))
     return fig
 
-def hist_b(elo=2200,v2='standard'):
+def hist_b(elo=2000,v2='standard'):
     df=df_init(2020,'Dec',v2)
     fig = px.histogram(df[df['Dec']>=elo]['federation'],
                        height=800,
@@ -171,7 +170,7 @@ hist_elo_fig=hist_a()
 map_fig=mapa()
 
 ll=['x','x','x','x','x']
-app = dash.Dash()
+#app = dash.Dash()
 
 app.layout = html.Div([
     dcc.Tabs(id="tabs", value='tab-0-example-graph', children=[
