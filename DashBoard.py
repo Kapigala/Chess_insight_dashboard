@@ -114,7 +114,7 @@ def hist_a(rok='2020', miesiac='Dec', tempo='standard'):
                        marginal='violin')
     return fig
 
-def mapa(tryb='AVG_ELO',rok='2020',miesiac='Dec',tempo='standard'):
+def mapa(tryb='GM_COUNT',rok='2020',miesiac='Dec',tempo='standard'):
     c=[]
     df_base=df_init(rok,miesiac,tempo)
 
